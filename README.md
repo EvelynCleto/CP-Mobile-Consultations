@@ -19,6 +19,9 @@ Este projeto é uma aplicação de gerenciamento de consultas médicas, desenvol
 ![Captura de tela 2024-10-15 231535](https://github.com/user-attachments/assets/ef602ac7-5c9f-49cc-b41b-25d41cde8480)
 
 
+![Captura de tela 2024-10-15 232840](https://github.com/user-attachments/assets/ad9941d8-1ed9-46bf-9f6f-7a17a2991098)
+
+
 ### 2. **Adição de Consultas**
    - **Apenas admins** podem adicionar consultas médicas.
    - Para adicionar uma nova consulta, o admin precisa fornecer as seguintes informações:
