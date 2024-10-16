@@ -12,14 +12,30 @@ Este projeto é uma aplicação de gerenciamento de consultas médicas, desenvol
    - **User**:
      - Pode visualizar apenas as consultas associadas ao seu ID de usuário, e que o **admin** permitiu que ele veja.
 
-![Captura de tela 2024-10-15 230834](https://github.com/user-attachments/assets/c2473f19-3842-41d5-a519-9c6d56a27c0a)
-![Captura de tela 2024-10-15 231606](https://github.com/user-attachments/assets/6c6f4fa6-d149-408d-ba2b-8e591ca358a7)
+### Visualização das Consultas para o Administrador
 
-![Captura de tela 2024-10-15 231004](https://github.com/user-attachments/assets/8c8fb1e2-fef9-4d87-a265-589d497dbccb)
-![Captura de tela 2024-10-15 231535](https://github.com/user-attachments/assets/ef602ac7-5c9f-49cc-b41b-25d41cde8480)
+As imagens abaixo mostram a visualização das consultas cadastradas no sistema quando acessado pelo **Admin**. O **Admin** tem acesso completo e pode visualizar todas as consultas cadastradas no sistema, independentemente do usuário associado.
 
+![Visualização das consultas pelo Admin - Parte 1](./assets/c2473f19-3842-41d5-a519-9c6d56a27c0a.png)
+![Visualização das consultas pelo Admin - Parte 2](./assets/6c6f4fa6-d149-408d-ba2b-8e591ca358a7.png)
 
-![Captura de tela 2024-10-15 232840](https://github.com/user-attachments/assets/ad9941d8-1ed9-46bf-9f6f-7a17a2991098)
+---
+
+### Visualização das Consultas para o Usuário
+
+As imagens abaixo mostram a visualização das consultas disponíveis para um **Usuário comum (User)**. O **User** só pode visualizar as consultas associadas ao seu próprio ID, e que o **Admin** definiu como visíveis. Isso garante que o usuário só veja as informações relevantes às suas consultas.
+
+![Visualização das consultas pelo User - Parte 1](./assets/8c8fb1e2-fef9-4d87-a265-589d497dbccb.png)
+![Visualização das consultas pelo User - Parte 2](./assets/ef602ac7-5c9f-49cc-b41b-25d41cde8480.png)
+
+---
+
+### Acesso Seguro
+
+O sistema implementa uma segurança que impede o acesso não autorizado às rotas de consultas sem os parâmetros corretos de autenticação. Se um usuário tenta acessar as rotas de consultas sem um parâmetro válido de role (papel), uma mensagem de erro é exibida, indicando que o acesso não é autorizado. Isso reforça o controle de quem pode visualizar as consultas e protege os dados.
+
+![Acesso negado sem autenticação adequada](./assets/ad9941d8-1ed9-46bf-9f6f-7a17a2991098.png)
+
 
 
 ### 2. **Adição de Consultas**
