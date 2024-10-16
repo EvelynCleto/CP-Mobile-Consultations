@@ -66,22 +66,41 @@ O projeto está dividido em **backend** e **frontend**:
 
 ### **Backend**
 
-O backend da aplicação é responsável por gerenciar as consultas e lidar com as requisições HTTP. Utiliza **Node.js** com **Express.js** e **SQLite** como banco de dados.
+O backend da aplicação é responsável por gerenciar as consultas e lidar com as requisições HTTP. Ele foi desenvolvido utilizando **Node.js** com o framework **Express.js**, e utiliza o **SQLite** como banco de dados para armazenar as consultas.
 
 #### **Rotas do Backend**:
 
 1. **Listar Consultas**:
-   - **GET `/api/consultations`**: Lista todas as consultas para o admin e apenas as consultas que o **admin** decidiu que o user pode visualizar.
-   - Exemplo de retorno para admin:
+   - **GET `/api/consultations`**: Esta rota lista todas as consultas quando acessada por um **Admin** e apenas as consultas que o **Admin** decidiu tornar visíveis para o **User**. 
+   - A rota aceita os seguintes parâmetros:
+     - **role**: Define se a solicitação é feita por um **Admin** ou **User**.
+     - **userId** (opcional): Utilizado apenas quando o **User** faz a solicitação para obter suas consultas.
+   - Exemplo de retorno para um **Admin**:
      ```json
      [
-       { "id": 1, "date": "2024-10-17", "doctor": "Dr. Almeida", "specialty": "Cardiologia", "status": "Confirmada", "userId": 1, "visibility": "visible" },
-       { "id": 2, "date": "2024-10-20", "doctor": "Dr. Souza", "specialty": "Dermatologia", "status": "Pendente", "userId": 2, "visibility": "hidden" }
+       {
+         "id": 1,
+         "date": "2024-10-17",
+         "doctor": "Dr. Almeida",
+         "specialty": "Cardiologia",
+         "status": "Confirmada",
+         "userId": 1,
+         "visibility": "visible"
+       },
+       {
+         "id": 2,
+         "date": "2024-10-20",
+         "doctor": "Dr. Souza",
+         "specialty": "Dermatologia",
+         "status": "Pendente",
+         "userId": 2,
+         "visibility": "hidden"
+       }
      ]
      ```
 
 2. **Criar Consulta**:
-   - **POST `/api/consultations`**: Cria uma nova consulta. Esta rota está acessível apenas para usuários com papel de **admin**.
+   - **POST `/api/consultations`**: Esta rota permite criar uma nova consulta no sistema. Ela está acessível apenas para usuários com papel de **Admin**, e o **Admin** decide se a consulta será visível para o **User** através do campo de visibilidade.
    - Exemplo de corpo da requisição:
      ```json
      {
@@ -95,7 +114,18 @@ O backend da aplicação é responsável por gerenciar as consultas e lidar com 
      ```
    - Exemplo de resposta:
      ```json
-     { "message": "Consulta criada com sucesso!", "consultation": { ... } }
+     { 
+       "message": "Consulta criada com sucesso!", 
+       "consultation": {
+         "id": 3,
+         "date": "2024-11-01",
+         "doctor": "Dr. Almeida",
+         "specialty": "Neurologia",
+         "status": "Pendente",
+         "userId": 2,
+         "visibility": "visible"
+       }
+     }
      ```
 
 #### **Porta do Backend**:
@@ -139,3 +169,11 @@ Certifique-se de ter as seguintes ferramentas instaladas:
    ```bash
    git clone https://github.com/EvelynCleto/CP-Mobile-Consultations.git
    cd CP-Mobile-Consultations
+
+
+## Integrantes do Grupo
+
+- **Evelyn Cleto da Silva** - RM: 93026
+- **Eduardo Kenji Pellichero Fujie** - RM: 92869
+- **Roberto Claudio Castro dos Santos** - RM: 96162
+
