@@ -3,7 +3,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors());
-app.use(express.json()); // Certifique-se de que o corpo da requisição seja lido como JSON
+app.use(express.json()); 
 
 // Array para armazenar consultas
 let consultations = [];
