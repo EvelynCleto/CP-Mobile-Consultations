@@ -28,12 +28,12 @@ export default function App() {
           component={ConsultationsListScreen}
           options={{ title: 'Consultas' }}
         />
-        <Stack.Screen
-          name="AddConsultation"
-          component={AddConsultationScreen}
-          options={{ title: 'Adicionar Consulta' }}
-        />
-      </Stack.Navigator>
+  <Stack.Screen
+    name="AddConsultation"
+    component={AddConsultationScreen}
+    options={{ title: 'Adicionar Consulta' }}
+  />
+</Stack.Navigator>
     </NavigationContainer>
   );
 }

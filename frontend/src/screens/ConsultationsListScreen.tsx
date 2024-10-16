@@ -5,11 +5,12 @@ import { useRoute, useNavigation, NavigationProp } from '@react-navigation/nativ
 import { RootStackParamList } from '../App';
 
 interface Consultation {
-  id: string; // Corrigido para string para coincidir com o ID gerado no backend
+  id: string;
   date: string;
   doctor: string;
   specialty: string;
   status: string;
+  visibility: string;
 }
 
 type ConsultationsListScreenNavigationProp = NavigationProp<RootStackParamList, 'Consultations'>;

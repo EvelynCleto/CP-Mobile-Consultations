@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { Picker } from '@react-native-picker/picker';  // Novo import
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
@@ -8,56 +9,73 @@ const AddConsultationScreen = () => {
   const [doctor, setDoctor] = useState('');
   const [specialty, setSpecialty] = useState('');
   const [status, setStatus] = useState('');
+  const [userId, setUserId] = useState('1');  // ID de exemplo
+  const [role, setRole] = useState('user');   // Novo campo para papel (user ou admin)
   const navigation = useNavigation();
 
   const handleAddConsultation = async () => {
+    if (!date || !doctor || !specialty || !status || !userId || !role) {
+      Alert.alert('Erro', 'Todos os campos são obrigatórios');
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:3000/api/consultations', {
         date,
         doctor,
         specialty,
         status,
-        userId: 1, // Assumindo que o userId seja 1
+        userId,
+        role, // Enviando o papel junto com a requisição
       });
+
       if (response.status === 201) {
-        alert('Consulta adicionada com sucesso!');
-        navigation.goBack(); // Volta para a lista de consultas
+        Alert.alert('Sucesso', 'Consulta adicionada com sucesso');
+        navigation.goBack(); // Volta para a tela anterior
+      } else {
+        Alert.alert('Erro', 'Erro ao tentar adicionar consulta');
       }
     } catch (error) {
       console.error('Erro ao adicionar consulta:', error);
+      Alert.alert('Erro', 'Erro ao tentar adicionar consulta');
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Data:</Text>
       <TextInput
+        placeholder="Data da Consulta"
         style={styles.input}
         value={date}
         onChangeText={setDate}
-        placeholder="Digite a data da consulta"
       />
-      <Text style={styles.label}>Médico:</Text>
       <TextInput
+        placeholder="Médico"
         style={styles.input}
         value={doctor}
         onChangeText={setDoctor}
-        placeholder="Digite o nome do médico"
       />
-      <Text style={styles.label}>Especialidade:</Text>
       <TextInput
+        placeholder="Especialidade"
         style={styles.input}
         value={specialty}
         onChangeText={setSpecialty}
-        placeholder="Digite a especialidade"
       />
-      <Text style={styles.label}>Status:</Text>
       <TextInput
+        placeholder="Status"
         style={styles.input}
         value={status}
         onChangeText={setStatus}
-        placeholder="Digite o status da consulta"
       />
+      {/* Picker para selecionar o papel */}
+      <Picker
+        selectedValue={role}
+        style={styles.input}
+        onValueChange={(itemValue) => setRole(itemValue)}
+      >
+        <Picker.Item label="Usuário" value="user" />
+        <Picker.Item label="Administrador" value="admin" />
+      </Picker>
       <Button title="Adicionar Consulta" onPress={handleAddConsultation} />
     </View>
   );
@@ -67,16 +85,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 8,
+    backgroundColor: '#f5f5f5',
   },
   input: {
-    borderWidth: 1,
+    height: 40,
     borderColor: '#ccc',
-    padding: 8,
-    marginBottom: 16,
+    borderWidth: 1,
+    marginBottom: 12,
+    paddingHorizontal: 8,
     borderRadius: 4,
   },
 });
